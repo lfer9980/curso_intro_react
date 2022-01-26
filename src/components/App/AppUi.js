@@ -5,6 +5,7 @@ import { TodoSearch } from "@components/TodoSearch";
 import { TodoList } from "@components/TodoList";
 import { TodoItem } from "@components/TodoItem";
 import { CreateTodoButton } from "@components/CreateTodoButton";
+import { Modal } from "@components/Modal";
 // import './App.css';
 
 function AppUi() {
@@ -13,7 +14,9 @@ function AppUi() {
 		loading, 
 		searchedTodos, 
 		toggleCompleteTodo, 
-		deleteTodo 
+		deleteTodo,
+		openModal,
+		setOpenModal,
 	} = React.useContext(TodoContext);
 
 
@@ -35,7 +38,16 @@ function AppUi() {
 					/>
 				))}
 				</TodoList>
-			<CreateTodoButton />
+
+				{!!openModal &&(
+					<Modal>
+						<p >{searchedTodos[0]?.text}</p>
+					</Modal>
+				)}
+
+			<CreateTodoButton
+				setOpenModal = {setOpenModal}
+			/>
 		</>
 	);
 }
